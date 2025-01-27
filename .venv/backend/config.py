@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+import psycopg2
 
 from pathlib import Path
 env_path = Path('.') / '.env'
@@ -18,3 +19,4 @@ class Settings:
 
 
 settings = Settings()
+
