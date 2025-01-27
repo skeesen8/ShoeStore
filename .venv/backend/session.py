@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker,Session
+import psycopg2
 
 from backend.config import settings
 from fastapi import Depends
