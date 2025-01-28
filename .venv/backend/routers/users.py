@@ -14,6 +14,8 @@ import secrets
 from datetime import datetime, timedelta, timezone
 
 
+
+
 SECRET_KEY = secrets.token_hex(32)
 # ALGORITHM = do I need this?
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
@@ -39,9 +41,41 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 pwd_context=CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-db=user_dependency
+# db=user_dependency
 
 router = APIRouter()
+# print(user_dependency)
+
+# def all_users(db:user_dependency):
+#     users_dict=[]
+#     users_query= db.query(Users_base).all()
+#     users_dict.append(users_query)
+#     return users_dict
+
+# tester = all_users(user_dependency)
+
+def get_user(db:user_dependency,username):
+    print(type(Users_hr.username))
+    print((Users_hr.username))
+    return db.query(Users_hr).filter(Users_hr.username == username).first()
+
+def authenticate_user(db:user_dependency,username:str,password:str):
+    user = get_user(db,username)
+    if not user:
+        return False
+    if not verify_password(password,user.hashed_password):
+        return False
+    return user
+
+def create_access_token(data: dict, expires_delta: timedelta | None=None):
+    to_encode=data.copy()
+    if expires_delta:
+        expire=datetime.now(timezone.utc) + expires_delta
+    else:
+        expire=datetime.now(timezone.utc) + timedelta(minutes=15)
+    to_encode.update({"exp": expire})
+    encoded_jwt=jwt.encode(to_encode, SECRET_KEY)
+    return encoded_jwt
 
 
 def run_hashed_password(password:str):
@@ -53,41 +87,17 @@ def verify_password(plain_password,hashed_password):
 def get_password_hash(password):
     return pwd_context.hash(password)
 
-# def get_user(username: str):
-#     username_db = Users_hr.username
-#     if username == username_db:
-#         user_dict= Users_hr[username]
-#     return user_dict
 
 
-def get_user(db:user_dependency, username: str):
-    print(db.query(Users_hr))
-    return db.query(Users_hr).filter(Users_hr.username==username).first()
 
     
-def authenticate_user(db:user_dependency,username:str,password:str):
-    user = get_user(db,username)
-    if not user:
-        return False
-    if not verify_password(password,user.hashed_password):
-        return False
-    return user
 
     
 
 def decode_token(token):
-    return Users_hr(
+    return Users_base(
         username=token, email="how can I make this dynamic?", id="Users_hr.id")
 
-def create_access_token(data: dict, expires_delta: timedelta | None=None):
-    to_encode=data.copy()
-    if expires_delta:
-        expire=datetime.now(timezone.utc) + expires_delta
-    else:
-        expire=datetime.now(timezone.utc) + timedelta(minutes=15)
-    to_encode.update({"exp": expire})
-    encoded_jwt=jwt.encode(to_encode, SECRET_KEY)
-    return encoded_jwt
 
 async def get_current_user(token:Annotated[str,Depends(oauth2_scheme)]):
     credentials_exception = HTTPException(
@@ -119,9 +129,9 @@ async def get_current_active_user(
 
 @router.post("/token")
 async def login_for_access_token(
-    form_data:Annotated[OAuth2PasswordRequestForm,Depends(),db:user_dependency],
+    form_data:Annotated[OAuth2PasswordRequestForm,Depends(),user_dependency],
 )-> Token:
-    user=authenticate_user(db,form_data.username,form_data.password)
+    user=authenticate_user(user_dependency,form_data.username,form_data.password)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -135,8 +145,8 @@ async def login_for_access_token(
     return Token(access_token=access_token, token_type="bearer")
 
 
-@router.get("/users/me")
-async def read_users_me(current_user: Annotated[Users_hr, Depends(get_current_active_user)]):
+@router.get("/users/me", response_model=Users_base)
+async def read_users_me(current_user: Annotated[Users_base, Depends(get_current_active_user)]):
     return current_user
 
 
@@ -144,6 +154,14 @@ async def read_users_me(current_user: Annotated[Users_hr, Depends(get_current_ac
 @router.get("/users")
 async def read_items(token:Annotated[str, Depends(oauth2_scheme)]):
     return{"token":token}
+
+@router.get("/users/all")
+async def all_users(db:user_dependency):
+    users_all=[]
+    usersq= db.query(Users_hr).all()
+    users_all.append(usersq)
+    return users_all
+
 
 
 
