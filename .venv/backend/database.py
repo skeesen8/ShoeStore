@@ -4,8 +4,6 @@ from sqlalchemy.orm import sessionmaker
 from backend.config import Settings
 
 
-# POSTGRESQL_DATABASE_URL = 'postgresql://postgres:sk2587@localhost:5434/dogdb'
-
 engine = create_engine(Settings.DATABASE_URL)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
