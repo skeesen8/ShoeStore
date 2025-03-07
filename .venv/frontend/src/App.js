@@ -2,8 +2,9 @@ import React, {useState, useEffect, use} from 'react';
 import api from './api';
 import Navbar from './navbar';
 import Login from './login';
+import Allusers from './Allusers';
 import Routesp from './Routesp';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Routes } from 'react-router-dom';
 
 
 const App = () => {
@@ -60,27 +61,11 @@ function users_list(){
     </div>
   );
 }
-
-
-return (
-       
-  <div>
-    <Navbar/>
-    <Login/>
-      <div className='container-fluid'>
-        {users_list()}
-        <a className='navbar-brand' href='#'>tesststt  </a>
-      </div>
     
-      </div>
     
-
-
-)
-
-
 
 };
+    
 
 export default App;
 

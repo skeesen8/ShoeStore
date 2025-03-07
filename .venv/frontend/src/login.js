@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {useState} from 'react';
+import Navbar from './navbar';
+import Routesp from './Routesp';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -29,7 +31,7 @@ const Login = () => {
     }
   }
   
-
+  
 
 
 
@@ -49,6 +51,8 @@ const Login = () => {
 
  
   return (
+    <div> 
+      <Navbar /> 
     <div className="container d-flex justify-content-center align-items-center vh-100">
       <div className="card p-4 shadow" style={{ width: '400px' }}>
         <h2 className="text-center mb-4">Login</h2>
@@ -65,7 +69,7 @@ const Login = () => {
               id="username"
               placeholder="Enter your username"
               required
-            />
+              />
           </div>
           <div className="mb-3">
             <label htmlFor="password" className="form-label">
@@ -79,7 +83,7 @@ const Login = () => {
               id="password"
               placeholder="Enter your password"
               required
-            />
+              />
           </div>
            <button onClick={handleSubmit} type="submit" className="btn btn-primary w-100">
             Login
@@ -89,6 +93,7 @@ const Login = () => {
         {/* {is_authenticated &&(
         <pre style={{textAlign:"start"}}>{JSON.stringify(user,null,2)} </pre>)} */}
       </div>
+    </div>
     </div>
   );
 };
