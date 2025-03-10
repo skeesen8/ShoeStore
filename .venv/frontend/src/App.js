@@ -1,18 +1,11 @@
 
 import React from 'react';
 import api from './api';
-import LoginForm from './LoginForm';
-import ReactDOM from 'react-dom/client';
-import { AuthProvider } from './AuthContext';
-import Dashboard from './Dashboard';
-// import { BrowserRouter,RouterProvider } from 'react-router-dom';
 import {createBrowserRouter,RouterProvider, BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import './index.css';
 import Allusers from './Allusers';
 import Login from './login';
 import {useState,useEffect} from 'react';
-// import App from './App';
-import Routesp from './Routesp';
 import Home from './Homescreen';
 import ProtectedRoute from './Protectedroute';
 import Logout from './Logout';
@@ -27,31 +20,19 @@ const App = () => {
     password: ''
   });
 
-//   const fetchUsers = async () => {
-//     const response = await api.get('/auth/users/all')
-//     (response => console.log(response))
-//     setUsers(response.data)
-//     console.log(response)
-// };
 
 const fetchUsers = async () => {
   try {
       const response = await api.get('/auth/users/all');
-      setUsers(response.data); // Correctly assign the data
+      setUsers(response.data); 
   } catch (error) {
       console.error('Error fetching users:', error);
   }
 };
 
 
-// useEffect(() => {
-//   fetchUsers();
- 
-
-// }, []);
 
 useEffect(() => {
-  // Check if token exists in localStorage and set the authenticated state
   const token = localStorage.getItem('token');
   if (token) {
     set_is_authenticated(true);
@@ -78,17 +59,10 @@ if (!is_authenticated) {
                       <Route path="/home" element={<Home />} />
                       <Route path="/auth/users/me" element={<Allusers />} />
           </Route>
-          {/* <Route path="/home" element={<Home />} />
-          <Route path="/auth/users/me" element={<Allusers />} /> Define the route */}
-          {/* Add more routes as needed */}
         </Routes>
       </Router>
-  // <Login /> 
 )
 
-
-//   // </AuthProvider>
-// )
 };
     
 

@@ -4,9 +4,7 @@ import { useNavigate,Navigate,Outlet } from 'react-router-dom';
 
 import {useState} from 'react';
 import Navbar from './navbar';
-import Routesp from './Routesp';
 import ProtectedRoute from './Protectedroute';
-import LoginForm from './LoginForm';
 
 const Login = ({set_is_authenticated,is_authenticated}) => {
   const navigate = useNavigate();
