@@ -1,14 +1,25 @@
-import React, {useState, useEffect, use} from 'react';
+
+import React from 'react';
 import api from './api';
-import Navbar from './navbar';
-import Login from './login';
+import LoginForm from './LoginForm';
+import ReactDOM from 'react-dom/client';
+import { AuthProvider } from './AuthContext';
+import Dashboard from './Dashboard';
+// import { BrowserRouter,RouterProvider } from 'react-router-dom';
+import {createBrowserRouter,RouterProvider, BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import './index.css';
 import Allusers from './Allusers';
+import Login from './login';
+import {useState,useEffect} from 'react';
+// import App from './App';
 import Routesp from './Routesp';
-import { BrowserRouter as Router, Route, Redirect, Routes } from 'react-router-dom';
+import Home from './Homescreen';
+import ProtectedRoute from './Protectedroute';
 
 
 const App = () => {
   const [users, setUsers] = useState([]);
+  const [is_authenticated, set_is_authenticated] = useState(false);
   const [formData, setFormData] = useState({
     username: '',
     password: ''
@@ -31,39 +42,41 @@ const fetchUsers = async () => {
 };
 
 
-
-
 useEffect(() => {
   fetchUsers();
 }, []);
 
-// const handleInputChange=(event) => {
-//   const username=event.target.value;
-//   const password=event.target.value
-//   setFormData({username, password});
-// };
 
-// const handleFormSubmit = async (event) => {
-//   event.preventDefault();
-//   await api.post('/users', formData);
-//   fetchUsers();
-//   setFormData({username: '', password: ''});
-// }
-function users_list(){
+
+if (!is_authenticated) {
   return (
-    <div>
-      <h1>Users</h1>
-      <ul>
-        {users.map(user => (
-          <li key={user.id}>id ={user.id} username={user.username}password ={user.hashed_password}</li>
-        ))}
-      </ul>
-    </div>
-  );
+    <Router>
+    
+      <Login set_is_authenticated={set_is_authenticated} />
+  
+    </Router>
+  )
 }
+  return(
     
-    
+    <Router>
+        <Routes>
+          <Route path="/" element={<Login set_is_authenticated={set_is_authenticated} is_authenticated={is_authenticated} />} />
+          <Route element={<ProtectedRoute is_authenticated={is_authenticated}/>}>
+                      <Route path="/home" element={<Home />} />
+                      <Route path="/auth/users/me" element={<Allusers />} />
+          </Route>
+          {/* <Route path="/home" element={<Home />} />
+          <Route path="/auth/users/me" element={<Allusers />} /> Define the route */}
+          {/* Add more routes as needed */}
+        </Routes>
+      </Router>
+  // <Login /> 
+)
 
+
+//   // </AuthProvider>
+// )
 };
     
 

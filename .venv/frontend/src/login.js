@@ -1,14 +1,18 @@
 import React from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Navigate,Outlet } from 'react-router-dom';
+
 import {useState} from 'react';
 import Navbar from './navbar';
 import Routesp from './Routesp';
+import ProtectedRoute from './Protectedroute';
+import LoginForm from './LoginForm';
 
-const Login = () => {
+const Login = ({set_is_authenticated,is_authenticated}) => {
   const navigate = useNavigate();
   const[username, set_username] = useState('');
   const[password, set_password] = useState('');
+  // const [is_authenticated, set_is_authenticated] = useState("false");
   // const history = useNavigate();
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -27,30 +31,15 @@ const Login = () => {
     console.log(response);
     if (response.access_token) {
       localStorage.setItem('token', response.access_token);
+      set_is_authenticated(true);
       navigate('/auth/users/me');
+      // return is_authenticated ? <Outlet /> : <Navigate to="/home"/>;
+      
     }
-  }
+  }  
   
-  
-
-
-
-
-  //   try {
-  //     const response = await axios.post('http://localhost:8000/auth/token', {
-  //       username: username,
-  //       password: password
-  //     });
-  //     console.log(response.data);
-     
-  //     console.log(response.data); 
-  //   } catch (error) {
-  //     console.error('Error during login:', error);
-  //   }
-  // };
-
- 
   return (
+    
     <div> 
       <Navbar /> 
     <div className="container d-flex justify-content-center align-items-center vh-100">
@@ -89,9 +78,8 @@ const Login = () => {
             Login
           </button>
         </form>
-        {/* <h3>User is {is_authenticated ? "Logged in" : "Not logged in"}</h3> */}
-        {/* {is_authenticated &&(
-        <pre style={{textAlign:"start"}}>{JSON.stringify(user,null,2)} </pre>)} */}
+        
+        <ProtectedRoute is_authenticated={is_authenticated} />
       </div>
     </div>
     </div>
