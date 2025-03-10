@@ -15,6 +15,8 @@ import {useState,useEffect} from 'react';
 import Routesp from './Routesp';
 import Home from './Homescreen';
 import ProtectedRoute from './Protectedroute';
+import Logout from './Logout';
+
 
 
 const App = () => {
@@ -42,8 +44,18 @@ const fetchUsers = async () => {
 };
 
 
+// useEffect(() => {
+//   fetchUsers();
+ 
+
+// }, []);
+
 useEffect(() => {
-  fetchUsers();
+  // Check if token exists in localStorage and set the authenticated state
+  const token = localStorage.getItem('token');
+  if (token) {
+    set_is_authenticated(true);
+  }
 }, []);
 
 

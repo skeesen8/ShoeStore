@@ -16,6 +16,7 @@ import reportWebVitals from './reportWebVitals';
 import { all } from 'axios';
 import Dashboard from './Dashboard';
 import { useState } from 'react'
+import Logout from './Logout';
 // const router=createBrowserRouter(routes)
 
 
@@ -26,8 +27,10 @@ import { useState } from 'react'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <>
   <App />
-  
+  <Logout />
+  </>
   
   // <Router>
   //     <Routes>
