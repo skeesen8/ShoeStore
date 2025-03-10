@@ -4,9 +4,7 @@ import { useNavigate,Navigate,Outlet } from 'react-router-dom';
 
 import {useState} from 'react';
 import Navbar from './navbar';
-import Routesp from './Routesp';
 import ProtectedRoute from './Protectedroute';
-import LoginForm from './LoginForm';
 
 const Login = ({set_is_authenticated,is_authenticated}) => {
   const navigate = useNavigate();
@@ -33,6 +31,7 @@ const Login = ({set_is_authenticated,is_authenticated}) => {
       localStorage.setItem('token', response.access_token);
       set_is_authenticated(true);
       navigate('/auth/users/me');
+      console.log(response.access_token)
       // return is_authenticated ? <Outlet /> : <Navigate to="/home"/>;
       
     }
