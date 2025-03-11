@@ -1,3 +1,4 @@
+import Logout from "./Logout";
 
 function Navbar() {
     return(
@@ -21,6 +22,7 @@ function Navbar() {
         <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
         </li>
+        <Logout />
       </ul>
     </div>
   </div>

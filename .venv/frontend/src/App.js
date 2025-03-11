@@ -12,6 +12,7 @@ import Logout from './Logout';
 
 
 
+
 const App = () => {
   const [users, setUsers] = useState([]);
   const [is_authenticated, set_is_authenticated] = useState(false);
@@ -40,24 +41,36 @@ useEffect(() => {
 }, []);
 
 
-
 if (!is_authenticated) {
   return (
-    <Router>
-    
+    <Router>   
       <Login set_is_authenticated={set_is_authenticated} />
-  
     </Router>
+
+  
+
+
+
+  
+   
   )
 }
+
+
+else
   return(
     
     <Router>
+        
+
         <Routes>
+        {/* <Route path="/newuser" element={<Signup />} /> */}
           <Route path="/" element={<Login set_is_authenticated={set_is_authenticated} is_authenticated={is_authenticated} />} />
           <Route element={<ProtectedRoute is_authenticated={is_authenticated}/>}>
                       <Route path="/home" element={<Home />} />
                       <Route path="/auth/users/me" element={<Allusers />} />
+            
+          
           </Route>
         </Routes>
       </Router>

@@ -42,6 +42,7 @@ oauth2_bearer=OAuth2PasswordBearer(tokenUrl="auth/token")
 class CreateUserRequest(BaseModel):
     username: str
     password:str
+    email:str
 
 class Token(BaseModel):
     access_token: str
@@ -62,6 +63,7 @@ async def create_user(db:db_dependency,
                       create_user_request:CreateUserRequest):
     create_user_model=Users(
         username=create_user_request.username,
+        email=create_user_request.email,
         hashed_password=bcrypt_context.hash(create_user_request.password)
 
     )
