@@ -12,6 +12,7 @@ import reportWebVitals from './reportWebVitals';
 import { all } from 'axios';
 import { useState } from 'react'
 import Logout from './Logout';
+import Navbar from './navbar';
 // const router=createBrowserRouter(routes)
 
 
@@ -23,8 +24,8 @@ import Logout from './Logout';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <>
+  <Navbar  />
   <App />
-  <Logout />
   </>
   
   
