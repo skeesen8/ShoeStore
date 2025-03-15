@@ -6,10 +6,11 @@ from backend.models import Base, Users
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordBearer,OAuth2PasswordRequestForm
 from backend.database import get_db
-from backend.routers import auth
+from backend.routers import auth,shoes
 from backend.routers.auth import get_current_user
 from backend.config import settings
 from backend.database import engine, SessionLocal 
+
 # from backend.routers.test_user import router
 # from backend.routers.users import router
 
@@ -49,6 +50,7 @@ user_dependency = Annotated[dict, Depends(get_current_user)]
 
 
 app.include_router(auth.router)
+app.include_router(shoes.router)
 
 
 # class user_base(BaseModel):

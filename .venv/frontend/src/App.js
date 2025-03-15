@@ -9,6 +9,7 @@ import {useState,useEffect} from 'react';
 import Home from './Homescreen';
 import ProtectedRoute from './Protectedroute';
 import Logout from './Logout';
+import Fetch_shoes from './Shoes';
 
 
 
@@ -46,11 +47,6 @@ if (!is_authenticated) {
     <Router>   
       <Login set_is_authenticated={set_is_authenticated} />
     </Router>
-
-  
-
-
-
   
    
   )
@@ -68,9 +64,7 @@ else
           <Route path="/" element={<Login set_is_authenticated={set_is_authenticated} is_authenticated={is_authenticated} />} />
           <Route element={<ProtectedRoute is_authenticated={is_authenticated}/>}>
                       <Route path="/home" element={<Home />} />
-                      <Route path="/auth/users/me" element={<Allusers />} />
-            
-          
+                      <Route path="/shoes" element={<Fetch_shoes />} /> 
           </Route>
         </Routes>
       </Router>
