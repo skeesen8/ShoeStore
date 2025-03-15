@@ -39,7 +39,7 @@ const Login = ({set_is_authenticated,is_authenticated}) => {
     if (response.access_token) {
       localStorage.setItem('token', response.access_token);
       set_is_authenticated(true);
-      navigate('/auth/users/me');
+      navigate('/shoes');
       console.log(response.access_token)
       // return is_authenticated ? <Outlet /> : <Navigate to="/home"/>;
       

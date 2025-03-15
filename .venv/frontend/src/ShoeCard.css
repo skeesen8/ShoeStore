@@ -1,0 +1,143 @@
+body {
+    font-family: 'Oswald', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevents scrollbars from appearing */
+  }
+  
+  /* Fixed Navbar */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Ensure it stays on top of other content */
+  }
+  
+  .navbar a {
+    color: #f05454;
+    text-decoration: none;
+    font-size: 1.2em;
+    margin: 0 15px;
+    transition: color 0.3s;
+  }
+  
+  .navbar a:hover {
+    color: #d43c3c;
+  }
+  
+  /* Carousel wrapper */
+  .carousel {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    margin-top: 70px; /* Accounts for the fixed navbar */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Shoe Card */
+  .shoe-card {
+    position: absolute;
+    width: 300px; /* Increased size */
+    height: 400px; /* Increased size */
+    background: linear-gradient(145deg, #1d1d1d, #232323);
+    border: 1px solid #3a3a3a;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: moveAcross 10s linear infinite;
+  }
+  
+  .shoe-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  }
+  
+  /* Shoe Image Container */
+  .shoe-image-container {
+    width: 100%;
+    height: 300px; /* Increased size */
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid #555;
+  }
+  
+  .shoe-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: contrast(1.2) grayscale(0.2);
+  }
+  
+  /* Shoe Details */
+  .shoe-details {
+    text-align: center;
+    margin-top: 15px;
+  }
+  
+  .shoe-brand {
+    color: #f05454;
+    text-transform: uppercase;
+    font-size: 1.8em; /* Larger brand name */
+  }
+  
+  .shoe-color span,
+  .shoe-size span,
+  .shoe-creator span,
+  .shoe-price span {
+    color: #29a19c;
+    font-weight: bold;
+  }
+  
+  /* Button */
+  .buy-now-button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 1.2em; /* Larger button text */
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    color: #121212;
+    background-color: #f05454;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .buy-now-button:hover {
+    background-color: #d43c3c;
+  }
+  
+  /* Animation Keyframes */
+  @keyframes moveAcross {
+    0% {
+      transform: translateX(100vw);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-100vw);
+      opacity: 0;
+    }
+  }
