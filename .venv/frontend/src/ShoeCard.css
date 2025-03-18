@@ -4,10 +4,10 @@ body {
     color: #e0e0e0;
     margin: 0;
     padding: 0;
-    overflow: hidden; /* Prevents scrollbars from appearing */
+    overflow: hidden; 
   }
   
-  /* Fixed Navbar */
+ 
   .navbar {
     position: fixed;
     top: 0;
@@ -20,7 +20,7 @@ body {
     justify-content: center;
     align-items: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 1000; /* Ensure it stays on top of other content */
+    z-index: 1000; 
   }
   
   .navbar a {
@@ -35,33 +35,39 @@ body {
     color: #d43c3c;
   }
   
-  /* Carousel wrapper */
   .carousel {
     position: relative;
     width: 100%;
     height: 400px;
-    margin-top: 70px; /* Accounts for the fixed navbar */
-    overflow: hidden;
+    margin-top: 10px; 
+    overflow: visible;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
   }
-  
-  /* Shoe Card */
+ 
+  .carousel img {
+    min-width: 100%; 
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.5s ease-in-out;
+  }
+ 
+
   .shoe-card {
-    position: absolute;
-    width: 300px; /* Increased size */
-    height: 400px; /* Increased size */
+    position: top;
+    width: 400px; 
+    height: 550px; 
     background: linear-gradient(145deg, #1d1d1d, #232323);
     border: 1px solid #3a3a3a;
     border-radius: 15px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: moveAcross 10s linear infinite;
+    animation: moveAcross 20s linear infinite;
   }
   
   .shoe-card:hover {
@@ -69,10 +75,10 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
   }
   
-  /* Shoe Image Container */
+  
   .shoe-image-container {
     width: 100%;
-    height: 300px; /* Increased size */
+    height: 300px; 
     overflow: hidden;
     border-radius: 10px;
     border: 1px solid #555;
@@ -85,7 +91,7 @@ body {
     filter: contrast(1.2) grayscale(0.2);
   }
   
-  /* Shoe Details */
+ 
   .shoe-details {
     text-align: center;
     margin-top: 15px;
@@ -94,7 +100,7 @@ body {
   .shoe-brand {
     color: #f05454;
     text-transform: uppercase;
-    font-size: 1.8em; /* Larger brand name */
+    font-size: 1.8em; 
   }
   
   .shoe-color span,
@@ -105,11 +111,11 @@ body {
     font-weight: bold;
   }
   
-  /* Button */
+ 
   .buy-now-button {
     margin-top: 15px;
     padding: 10px 20px;
-    font-size: 1.2em; /* Larger button text */
+    font-size: 1.2em; 
     font-weight: bold;
     text-transform: uppercase;
     border: none;
@@ -124,7 +130,7 @@ body {
     background-color: #d43c3c;
   }
   
-  /* Animation Keyframes */
+  
   @keyframes moveAcross {
     0% {
       transform: translateX(100vw);
@@ -141,3 +147,5 @@ body {
       opacity: 0;
     }
   }
+
+  
