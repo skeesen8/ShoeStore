@@ -68,9 +68,10 @@ Shoe Store is an application that allows users to buy designer shoes, it is an a
 ### Built With
 
 * [![React][React.js]][React-url]
-* [![Flask][Flask]][Flask-url]
 * [![Python][Python.org]][Python-url]
-* [![Chakra UI][Chakra.com]][Chakra-url]
+* FAST API
+* POSTGRESQL
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
