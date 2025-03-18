@@ -3,6 +3,8 @@ import { useState,useEffect } from "react";
 import api from "./api"; 
 import axios from "axios";
 import ShoeCard from "./ShoeCard";
+import Rotate from "./Rotate";
+
 
 const Fetch_shoes = () => {
     const [all_shoes, set_shoes] = useState([]);
@@ -21,7 +23,7 @@ const Fetch_shoes = () => {
     }, []);
   
     const render_shoes = all_shoes.map((item) => (
-
+        
         <ShoeCard
         set_shoes={set_shoes}
         key={item.id}
@@ -33,15 +35,17 @@ const Fetch_shoes = () => {
         image={item.image}
         price={item.start_price}
         buy_now={item.buy_now}
+
          
         />
     ));
   
     return (
-      <div>
-        <h1>Shoes</h1>
+      <div className="carousel">
+        <div>
+        Shoe Selection  
+        </div>
         {render_shoes}
-        {/* <ShoeCard/> */}
       </div>
     );
 }
