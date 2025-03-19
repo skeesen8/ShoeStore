@@ -1,9 +1,6 @@
 import React from 'react';
-import axios from 'axios';
-import { useNavigate,Navigate,Outlet } from 'react-router-dom';
-
+import { useNavigate} from 'react-router-dom';
 import {useState} from 'react';
-import ProtectedRoute from './Protectedroute';
 
 
 const Login = ({set_is_authenticated,is_authenticated}) => {
@@ -41,7 +38,6 @@ const Login = ({set_is_authenticated,is_authenticated}) => {
       set_is_authenticated(true);
       navigate('/shoes');
       console.log(response.access_token)
-      // return is_authenticated ? <Outlet /> : <Navigate to="/home"/>;
       
     }
   }  

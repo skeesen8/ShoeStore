@@ -57,3 +57,11 @@ async def create_shoes(shoes:Shoes_base, db:db_dependency):
     db.commit()         
     db.refresh(db_shoes)
     return db_shoes
+
+
+@router.get("/shoes/{id}")
+async def get_shoe_by_id(id: int, db: db_dependency):
+    shoe_by_id = db.query(Shoes).get(id)
+    if not shoe_by_id:
+        return {"error": "Shoe not found"}  # Handle case where no shoe matches the ID
+    return shoe_by_id

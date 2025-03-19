@@ -1,9 +1,10 @@
 import React from "react";
 import { useState,useEffect } from "react";
-import api from "./api"; 
 import axios from "axios";
 import ShoeCard from "./ShoeCard";
-import Rotate from "./Rotate";
+import './ShoeCard.css'
+import './index.css'
+
 
 
 const Fetch_shoes = () => {
