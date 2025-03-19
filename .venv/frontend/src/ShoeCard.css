@@ -238,6 +238,13 @@
         position: relative;
       }
 
+      
+      .popup-overlay:hover {
+        cursor: default; 
+        transform: none; 
+      }
+      
+
 
   .buy-now-button {
     margin-top: 15px;

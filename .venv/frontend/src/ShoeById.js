@@ -61,14 +61,14 @@ const ShoeById = () => {
               Price: <span>${item.start_price}</span>
             </p>
             {item.buy_now && (
-                <div className="popup-content">
+                <div className="popup-content"onMouseEnter={(e) => e.stopPropagation()}>
               <button  onClick={showPopup} className="buy-now-button">
                 Buy Now
               </button>
               </div>
             )}
             {isPopupVisible && (
-              <div className="popup-overlay">
+              <div className="popup-overlay"onMouseEnter={(e) => e.stopPropagation()}>
                 <div className="popup-content">
                   <span className="close-button" onClick={hidePopup}>
                     &times;
