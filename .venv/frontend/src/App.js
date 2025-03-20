@@ -10,6 +10,7 @@ import Home from './Homescreen';
 import ProtectedRoute from './Protectedroute';
 import Fetch_shoes from './Shoes';
 import ShoeById from './ShoeById';
+import CreateShoe from './CreateShoe';
 
 
 
@@ -63,6 +64,7 @@ else
           <Route path="/" element={<Login set_is_authenticated={set_is_authenticated} is_authenticated={is_authenticated} />} />
           <Route element={<ProtectedRoute is_authenticated={is_authenticated}/>}>
                       <Route path="/home" element={<Home />} />
+                      <Route path="/sell" element={<CreateShoe/>}/>
                       <Route path="/shoes" element={<Fetch_shoes />}/> 
                       <Route path="/shoes/:id" element={<ShoeById/>}/>
           </Route>

@@ -42,12 +42,9 @@ const Fetch_shoes = () => {
     ));
   
     return (
-      <div className="carousel">
-        <div>
-        Shoe Selection  
-        </div>
+    <div className="shoe-grid">
         {render_shoes}
-      </div>
+    </div>
     );
 }
 
