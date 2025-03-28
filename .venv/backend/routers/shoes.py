@@ -60,15 +60,6 @@ async def all_shoes(db:db_dependency):
 
 
 
-# @router.post("/shoes", response_model=Shoes_base)
-# async def create_shoes(shoes:Shoes_base, db:db_dependency):
-#     db_shoes=Shoes(**shoes.model_dump())
-#     db.add(db_shoes)
-#     db.commit()         
-#     db.refresh(db_shoes)
-#     return db_shoes
-
-
 @router.post("/shoes", status_code=status.HTTP_201_CREATED)
 async def create_shoe(
     create_shoe_request: CreateShoeRequest,  
