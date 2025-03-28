@@ -99,12 +99,17 @@ To get a local copy up and running follow these simple example steps.
     source .venv/bin/activate  # On Windows, use `.venv\Scripts\activate`
     ```
 
-3. Install the required dependencies:
+3. Move into Backend Directory:
+    ```bash
+    cd .venv/backend
+    ```
+
+4. Install the required dependencies:
     ```bash
     pip install fastapi uvicorn
     ```
 
-4. Run the FastAPI server:
+5. Run the FastAPI server:
     ```bash
     uvicorn auth:app --reload
     ```
@@ -115,13 +120,17 @@ To get a local copy up and running follow these simple example steps.
     ```bash
     cd .venv/frontend
     ```
+2. Ensure you have node installed:
+    ```bash
+    hyper link to npm page
+    ```
 
-2. Install the required dependencies:
+3. Install the required dependencies:
     ```bash
     npm install
     ```
 
-3. Start the React development server:
+4. Start the React development server:
     ```bash
     npm start
     ```
