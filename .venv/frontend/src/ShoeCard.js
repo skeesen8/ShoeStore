@@ -1,59 +1,72 @@
-import { useState,useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
 
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import './ShoeCard.css'
+import './index.css'
 
 const ShoeCard = ({
-      id,
-      brand,
-      color,
-      size,
-      creator_id,
-      image,
-      price,
-      buy_now,
-      set_shoes,
-    }) => {
+  id,
+  brand,
+  color,
+  size,
+  image,
+  price,
+  buy_now,
+}) => {
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const navigate = useNavigate();
 
-        const [isPopupVisible, setIsPopupVisible] = useState(false);
 
-        const showPopup = () => {
-          setIsPopupVisible(!isPopupVisible);
-        };
-      
-        const hidePopup = () => {
-          setIsPopupVisible(false);
-        };
+  const reroute = () => {
+    navigate(`/shoes/${id}`);
+    console.log(id);
+  };
 
-      return (
-        <div className="carousel">
-        <div className="shoe-card" key={id} >
-          <div className="shoe-image-container">
-            <img src={image} alt={`${brand} Shoe`} className="shoe-image" />
+  const hidePopup = () => {
+    setIsPopupVisible(false);
+  };
+
+  return (
+    <div className="shoe-card modern-login-card" key={id}>
+      {/* Apply shared styles (modern-login-card) */}
+      <div className="shoe-image-container">
+        <img src={image} alt={`${brand} Shoe`} className="shoe-image" />
+      </div>
+      <div className="shoe-details">
+        <h2 className="shoe-brand login-header">{brand}</h2>
+        {/* Styled text */}
+        <p className="shoe-color modern-input">
+          Color: <span>{color}</span>
+        </p>
+        <p className="shoe-size modern-input">
+          Size: <span>{size}</span>
+        </p>
+        <p className="shoe-price modern-input">
+          Price: <span>${price}</span>
+        </p>
+        <button
+          onClick={reroute}
+          className="buy-now-button modern-button"
+        >
+          Buy Now
+        </button>
+        {isPopupVisible && (
+          <div className="popup-overlay">
+            <div className="popup-content modern-login-card">
+              <span className="close-button" onClick={hidePopup}>
+                &times;
+              </span>
+              <h2>Congratulations, you have purchased this shoe!</h2>
+              <p>🎉🎉🎉🎉🎉🎉🎉</p>
+            </div>
           </div>
-          <div className="shoe-details">
-            <h2 className="shoe-brand">{brand}</h2>
-            <p className="shoe-color">Color: <span>{color}</span></p>
-            <p className="shoe-size">Size: <span>{size}</span></p>
-            <p className="shoe-price">Price: <span>${price}</span></p>
-            {buy_now && <button onClick={showPopup} className="buy-now-button">Buy Now</button>}
-            {isPopupVisible && (
-        <div className="popup-overlay">
-          <div className="popup-content">
-            <span className="close-button" onClick={hidePopup}>
-              &times;
-            </span>
-            <h2>Congratulations you have purchased this shoe!</h2>
-            <p>🎉🎉🎉🎉🎉🎉🎉</p>
-          </div>
-        </div>
-      )}
-          </div>
-        </div>
-        </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ShoeCard;
 
 
-      );
-    };
-    
 
-export default ShoeCard

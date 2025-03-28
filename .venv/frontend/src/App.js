@@ -1,15 +1,16 @@
 
 import React from 'react';
 import api from './api';
-import {createBrowserRouter,RouterProvider, BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import {createBrowserRouter,RouterProvider, BrowserRouter as Router, Routes, Route,useParams } from "react-router-dom"
 import './index.css';
-import Allusers from './Allusers';
+import './ShoeCard.css';
 import Login from './login';
 import {useState,useEffect} from 'react';
 import Home from './Homescreen';
 import ProtectedRoute from './Protectedroute';
-import Logout from './Logout';
 import Fetch_shoes from './Shoes';
+import ShoeById from './ShoeById';
+import CreateShoe from './CreateShoe';
 
 
 
@@ -60,11 +61,12 @@ else
         
 
         <Routes>
-        {/* <Route path="/newuser" element={<Signup />} /> */}
           <Route path="/" element={<Login set_is_authenticated={set_is_authenticated} is_authenticated={is_authenticated} />} />
           <Route element={<ProtectedRoute is_authenticated={is_authenticated}/>}>
                       <Route path="/home" element={<Home />} />
-                      <Route path="/shoes" element={<Fetch_shoes />} /> 
+                      <Route path="/sell" element={<CreateShoe/>}/>
+                      <Route path="/shoes" element={<Fetch_shoes />}/> 
+                      <Route path="/shoes/:id" element={<ShoeById/>}/>
           </Route>
         </Routes>
       </Router>

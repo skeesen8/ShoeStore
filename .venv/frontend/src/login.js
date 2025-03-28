@@ -1,9 +1,7 @@
 import React from 'react';
-import axios from 'axios';
-import { useNavigate,Navigate,Outlet } from 'react-router-dom';
-
+import { useNavigate} from 'react-router-dom';
 import {useState} from 'react';
-import ProtectedRoute from './Protectedroute';
+
 
 
 const Login = ({set_is_authenticated,is_authenticated}) => {
@@ -41,7 +39,6 @@ const Login = ({set_is_authenticated,is_authenticated}) => {
       set_is_authenticated(true);
       navigate('/shoes');
       console.log(response.access_token)
-      // return is_authenticated ? <Outlet /> : <Navigate to="/home"/>;
       
     }
   }  
@@ -80,8 +77,9 @@ const Login = ({set_is_authenticated,is_authenticated}) => {
 
 ;
 return (
-  <div>
-    <div className="container d-flex justify-content-center align-items-center vh-100">
+  <div className='app-background'>
+
+    <div className="login-container d-flex justify-content-center align-items-center vh-100">
       <div className="card p-4 shadow-lg modern-login-card">
         {new_account ? (
           <>
@@ -95,7 +93,7 @@ return (
                   className="form-control modern-input"
                   placeholder="Username"
                   required
-                />
+                  />
               </div>
               <div className="mb-3">
                 <input
@@ -105,7 +103,7 @@ return (
                   className="form-control modern-input"
                   placeholder="Email"
                   required
-                />
+                  />
               </div>
               <div className="mb-3">
                 <input
@@ -115,7 +113,7 @@ return (
                   className="form-control modern-input"
                   placeholder="Password"
                   required
-                />
+                  />
               </div>
               <button type="submit" className="btn btn-primary w-100 modern-button">
                 Create Account
@@ -124,7 +122,7 @@ return (
                 onClick={toggleAccount}
                 type="button"
                 className="btn btn-secondary w-100 mt-2 modern-secondary-button"
-              >
+                >
                 Go to Login
               </button>
             </form>
@@ -141,7 +139,7 @@ return (
                   className="form-control modern-input"
                   placeholder="Username"
                   required
-                />
+                  />
               </div>
               <div className="mb-3">
                 <input
@@ -151,7 +149,7 @@ return (
                   className="form-control modern-input"
                   placeholder="Password"
                   required
-                />
+                  />
               </div>
               <button type="submit" className="btn btn-primary w-100 modern-button">
                 Login
@@ -160,15 +158,15 @@ return (
                 onClick={toggleAccount}
                 type="button"
                 className="btn btn-secondary w-100 mt-2 modern-secondary-button"
-              >
+                >
                 Create Account
               </button>
             </form>
           </>
         )}
+        </div>
       </div>
     </div>
-  </div>
 )
 
 }

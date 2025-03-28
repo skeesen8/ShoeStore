@@ -1,9 +1,10 @@
 import React from "react";
 import { useState,useEffect } from "react";
-import api from "./api"; 
 import axios from "axios";
 import ShoeCard from "./ShoeCard";
-import Rotate from "./Rotate";
+import './ShoeCard.css'
+import './index.css'
+
 
 
 const Fetch_shoes = () => {
@@ -41,12 +42,9 @@ const Fetch_shoes = () => {
     ));
   
     return (
-      <div className="carousel">
-        <div>
-        Shoe Selection  
-        </div>
+    <div className="shoe-grid">
         {render_shoes}
-      </div>
+    </div>
     );
 }
 

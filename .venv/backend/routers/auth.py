@@ -22,6 +22,8 @@ class Users_base(BaseModel):
     email:     str | None=None
     disabled: bool | None=None
 
+
+
     class Config:
          from_attributes=True
 
@@ -32,12 +34,12 @@ router = APIRouter(
 )
 
 
-SECRET_KEY = secrets.token_hex(32)
+SECRET_KEY = secrets.token_hex(64)
 ALGORITHM="HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 bcrypt_context=CryptContext(schemes=["bcrypt"], deprecated="auto")
-oauth2_bearer=OAuth2PasswordBearer(tokenUrl="auth/token")
+oauth2_bearer=OAuth2PasswordBearer(tokenUrl="/auth/token")
 
 class CreateUserRequest(BaseModel):
     username: str
@@ -53,7 +55,7 @@ def get_db():
     try:
         yield db
     finally:
-        db.close
+        db.close()
 
 db_dependency = Annotated[Session, Depends(get_db)]
 
@@ -98,19 +100,27 @@ logger=logging.getLogger("trytoprint")
 
 async def get_current_user(token:Annotated[str, Depends(oauth2_bearer)]):
     try:
-        print("anything")
         payload = jwt.decode(token=token,key=SECRET_KEY, algorithms=ALGORITHM)
-        # logger.debug(payload)
         print(f"search for string {payload}")
         username: str = payload.get("sub")
         user_id: int = payload.get("id")
+        exp:int = payload.get("exp")
         if username is None or user_id is None:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
                                 detail="Could not validate user.")
-        return{"username": username, "id": user_id}
+        return{"username": username, "id": user_id,"exp":exp }
     except JWTError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
                             detail="Could not validate user test.")
+    
+
+
+@router.get("/users/current_id", response_model=dict)
+async def get_current_user_id(
+    current_user: Annotated[dict, Depends(get_current_user)]
+):
+    return {"id": current_user["id"]}
+
     
     
 @router.get("/users/all")

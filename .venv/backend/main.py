@@ -11,11 +11,6 @@ from backend.routers.auth import get_current_user
 from backend.config import settings
 from backend.database import engine, SessionLocal 
 
-# from backend.routers.test_user import router
-# from backend.routers.users import router
-
-
-
 
     
 def create_tables():         
@@ -29,16 +24,10 @@ def start_application():
 app = start_application()
 
 app = FastAPI()
-# origins = [
-#      'http://localhost:3000',
-# ]
-# app.add_middleware(
-#      CORSMiddleware,
-#      allow_origins=origins,
-# )
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Allow specific origin
+    allow_origins=["http://localhost:3000"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -51,21 +40,6 @@ user_dependency = Annotated[dict, Depends(get_current_user)]
 
 app.include_router(auth.router)
 app.include_router(shoes.router)
-
-
-# class user_base(BaseModel):
-#     id:int
-#     username:  str | None=None
-#     password:  str | None=None
-#     email:     str | None=None
-#     disabled: bool | None=None
-#     hashed_password: str | None=None
-
-#     class Config:
-#          orm_mode=True
-
-
-
 
 
 @app.get("/", status_code=status.HTTP_200_OK)
