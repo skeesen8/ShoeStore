@@ -1,0 +1,23 @@
+services:
+  # Backend service
+  - name: hris-backend
+    type: web
+    env: python
+    buildCommand: ""
+    startCommand: uvicorn auth:app --host 0.0.0.0 --port 8000
+    envVars:
+      - key: PORT
+        value: 8000
+    plan: free
+
+  # Frontend service
+  - name: hris-frontend
+    type: web
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    staticPublishPath: .venv/frontend/build
+    envVars:
+      - key: REACT_APP_BACKEND_URL
+        value: https://hris-backend.onrender.com
+    plan: free
