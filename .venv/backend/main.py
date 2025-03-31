@@ -11,7 +11,7 @@ from backend.routers.auth import get_current_user
 from backend.config import settings
 from backend.database import engine, SessionLocal 
 
-
+# testes
     
 def create_tables():         
 	Base.metadata.create_all(bind=engine)
