@@ -30,7 +30,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "https://shoe-store-g3p7la424-skeesen8s-projects.vercel.app",
-        "https://shoe-store-kappa-seven.vercel.app"
+        "https://shoe-store-kappa-seven.vercel.app",
+        "https://shoe-store-kpulrwgcz-skeesen8s-projects.vercel.app"
     ], 
     allow_credentials=True,
     allow_methods=["*"],
