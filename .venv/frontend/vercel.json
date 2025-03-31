@@ -6,9 +6,7 @@
         "use": "@vercel/static-build",
         "config": {
           "distDir": "frontend/build"
-        },
-        "buildCommand": "npm install && npm run build",
-        "startCommand": "npm start"
+        }
       },
       {
         "src": "backend/main.py",
