@@ -27,7 +27,11 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000","https://shoe-store-g3p7la424-skeesen8s-projects.vercel.app/","'https://shoe-store-kappa-seven.vercel.app'"],  
+    allow_origins=[
+        "http://localhost:3000",
+        "https://shoe-store-g3p7la424-skeesen8s-projects.vercel.app",
+        "https://shoe-store-kappa-seven.vercel.app"
+    ], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
