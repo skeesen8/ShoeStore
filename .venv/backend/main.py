@@ -1,18 +1,23 @@
-from fastapi import APIRouter, Depends,HTTPException,status,FastAPI
+import sys
+import os
+
+# Add the current directory to the Python path
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+from fastapi import APIRouter, Depends, HTTPException, status, FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Annotated
 from backend.models import Base, Users
 from sqlalchemy.orm import Session
-from fastapi.security import OAuth2PasswordBearer,OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from backend.database import get_db
-from backend.routers import auth,shoes
+from backend.routers import auth, shoes
 from backend.routers.auth import get_current_user
 from backend.config import settings
-from backend.database import engine, SessionLocal 
+from backend.database import engine, SessionLocal
 
-# testes
-    
+
 def create_tables():         
 	Base.metadata.create_all(bind=engine)
     
@@ -27,12 +32,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "https://shoe-store-g3p7la424-skeesen8s-projects.vercel.app",
-        "https://shoe-store-kappa-seven.vercel.app",
-        "https://shoe-store-kpulrwgcz-skeesen8s-projects.vercel.app"
-    ], 
+    allow_origins=["http://localhost:3000","https://shoe-store-g3p7la424-skeesen8s-projects.vercel.app/","'https://shoe-store-kappa-seven.vercel.app'"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -40,7 +40,6 @@ app.add_middleware(
 
 db_dependency = Annotated[Session, Depends(get_db)]
 user_dependency = Annotated[dict, Depends(get_current_user)]
-
 
 
 app.include_router(auth.router)
