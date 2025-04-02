@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
       {
-        "src": ".venv/backend/main.py",
+        "src": "backend/main.py",
         "use": "@vercel/python",
         "config": {
         "env": {
@@ -14,7 +14,7 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": ".venv/backend/main.py"
+        "dest": "backend/main.py"
       }
     ]
   }
