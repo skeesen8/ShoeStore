@@ -1,7 +1,7 @@
 import sys
 import os
 
-# Add the current directory to the Python path
+# Add the parent directory to the Python path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from fastapi import FastAPI, HTTPException, status, Depends
