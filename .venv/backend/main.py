@@ -1,11 +1,11 @@
 from fastapi import FastAPI, HTTPException, status, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-from backend.models import Base
-from backend.database import engine, get_db
-from backend.routers import auth, shoes
-from backend.routers.auth import get_current_user
-from backend.config import settings
+from .models import Base
+from .database import engine, get_db
+from .routers import auth, shoes
+from .routers.auth import get_current_user
+from .config import settings
 
 def create_tables():
     Base.metadata.create_all(bind=engine)
