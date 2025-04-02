@@ -11,6 +11,5 @@
         "src": "/(.*)",
         "dest": "backend/main.py"
       }
-    ],
-    "workingDirectory": "backend"
+    ]
   }
