@@ -3,7 +3,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, TIMESTAMP, Boolean, text
 
 
-
 class Users(Base):
     __tablename__='users'
     id = Column(Integer,primary_key=True,nullable=False)
