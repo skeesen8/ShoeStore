@@ -1,9 +1,3 @@
-import sys
-import os
-
-# Add the parent directory to the Python path
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
 from fastapi import FastAPI, HTTPException, status, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -37,7 +31,6 @@ def start_application():
 
     return app
 
-# Initialize the app only once
 app = start_application()
 
 @app.get("/", status_code=status.HTTP_200_OK)
