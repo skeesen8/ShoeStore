@@ -1,1 +1,1 @@
-web: gunicorn --worker-class uvicorn.workers.UvicornWorker --workers 1 --bind 0.0.0.0:$PORT --log-level debug --access-logfile - --error-logfile - backend.main:app 
+web: PYTHONPATH=$PYTHONPATH:. gunicorn --worker-class uvicorn.workers.UvicornWorker --workers 1 --bind 0.0.0.0:$PORT --log-level debug --access-logfile - --error-logfile - backend.main:app 
