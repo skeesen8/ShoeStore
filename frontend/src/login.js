@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate} from 'react-router-dom';
 import {useState} from 'react';
+import config from './config';
 
 
 
@@ -22,53 +23,64 @@ const Login = ({set_is_authenticated,is_authenticated}) => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     console.log(username, password);
-    const response = await fetch('http://localhost:8000/auth/token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        username: username,
-        password: password,
-      }),
-    })
-    .then(response => response.json())
-    console.log(response);
-    if (response.access_token) {
-      localStorage.setItem('token', response.access_token);
-      set_is_authenticated(true);
-      navigate('/shoes');
-      console.log(response.access_token)
-      
+    try {
+      const response = await fetch(`${config.apiUrl}/auth/token`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          username: username,
+          password: password,
+        }),
+      })
+      .then(response => response.json())
+      console.log(response);
+      if (response.access_token) {
+        localStorage.setItem('token', response.access_token);
+        set_is_authenticated(true);
+        navigate('/shoes');
+        console.log(response.access_token)
+        
+      }
+    } catch (error) {
+      console.error('Error in handleSubmit:', error);
     }
   }  
 
   const handleCreateUser = async(e)=>{
     e.preventDefault();
-    const response = await fetch('http://localhost:8000/auth/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password, username })
-    }
-  );
+    try {
+      const response = await fetch(`${config.apiUrl}/auth/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+          email: email,
+        }),
+      });
 
-    if(response.ok){
-      set_email('');
-      set_password('');
-      set_username('');
-      toggleAccount()
-    }
+      if(response.ok){
+        set_email('');
+        set_password('');
+        set_username('');
+        toggleAccount()
+      }
 
-    if (!response.ok) {
-      const errorResponse = await response.json();
-      console.error('Error response from server:', errorResponse);
-      throw new Error('Network response was not ok');
-    }
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        console.error('Error response from server:', errorResponse);
+        throw new Error('Network response was not ok');
+      }
 
-    const data = await response.json();
-    console.log('User created:', data);
+      const data = await response.json();
+      console.log('User created:', data);
+    } catch (error) {
+      console.error('Error in handleCreateUser:', error);
+    }
   }
 
 

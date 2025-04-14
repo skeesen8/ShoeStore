@@ -4,6 +4,7 @@ import axios from "axios";
 import ShoeCard from "./ShoeCard";
 import './ShoeCard.css'
 import './index.css'
+import config from './config';
 
 
 
@@ -12,7 +13,7 @@ const Fetch_shoes = () => {
   
     const load_shoes = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/shoes');
+        const response = await axios.get(`${config.apiUrl}/shoes`);
         set_shoes(response.data); 
       } catch (error) {
         console.error('Error fetching shoes:', error);

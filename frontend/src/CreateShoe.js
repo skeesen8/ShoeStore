@@ -1,5 +1,6 @@
 import React, { use, useState } from "react";
 import "./index.css"; // Import your shared CSS styles
+import config from './config';
 
 const CreateShoe = () => {
     const [brand,set_brand]=useState('')
@@ -16,7 +17,7 @@ const CreateShoe = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:8000/shoes", {
+            const response = await fetch(`${config.apiUrl}/shoes`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

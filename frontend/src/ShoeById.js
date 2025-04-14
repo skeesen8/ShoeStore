@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import ShoeDetails from "./ShoeDetails";
 import './ShoeCard.css'
 import './index.css'
+import config from './config';
 
 const ShoeById = () => {
   const { id } = useParams();
@@ -12,7 +13,7 @@ const ShoeById = () => {
 
   const load_shoe = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/shoes/${id}`);
+      const response = await axios.get(`${config.apiUrl}/shoes/${id}`);
       set_id(Array.isArray(response.data) ? response.data : [response.data]);
     } catch (error) {
       console.error("Error fetching shoes:", error);
