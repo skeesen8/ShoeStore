@@ -38,11 +38,16 @@ app.include_router(shoes.router)
 @app.on_event("startup")
 async def startup_event():
     try:
+        logger.info("Starting up application...")
+        is_connected = await test_connection()
+        if not is_connected:
+            raise Exception("Failed to connect to database")
+        
         async with engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
         logger.info("Database tables created successfully")
     except Exception as e:
-        logger.error(f"Error creating database tables: {str(e)}")
+        logger.error(f"Error during startup: {str(e)}")
         raise
 
 @app.get("/", status_code=status.HTTP_200_OK)
