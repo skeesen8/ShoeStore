@@ -8,9 +8,14 @@ from routers.auth import get_current_user
 from config import settings
 import logging
 import os
+import sys
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
+# Configure logging to output to stdout
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    stream=sys.stdout
+)
 logger = logging.getLogger(__name__)
 
 # Create FastAPI app
@@ -39,6 +44,9 @@ app.include_router(shoes.router)
 async def startup_event():
     try:
         logger.info("Starting up application...")
+        logger.info(f"Environment: {os.environ.get('ENVIRONMENT', 'development')}")
+        logger.info(f"Database URL: {os.environ.get('DATABASE_URL', 'Not set')}")
+        
         is_connected = await test_connection()
         if not is_connected:
             raise Exception("Failed to connect to database")
