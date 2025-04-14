@@ -1,11 +1,11 @@
 from fastapi import FastAPI, HTTPException, status, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.models import Base
-from backend.database import engine, get_db, test_connection
-from backend.routers import auth, shoes
-from backend.routers.auth import get_current_user
-from backend.config import settings
+from models import Base
+from database import engine, get_db, test_connection
+from routers import auth, shoes
+from routers.auth import get_current_user
+from config import settings
 import logging
 import os
 
