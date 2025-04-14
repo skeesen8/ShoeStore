@@ -1,1 +1,1 @@
-web: gunicorn -w 4 -k uvicorn.workers.UvicornWorker backend.main:app 
+web: gunicorn --log-level debug --access-logfile - --error-logfile - --capture-output --enable-stdio-inheritance backend.main:app 
